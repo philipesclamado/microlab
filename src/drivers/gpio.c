@@ -26,13 +26,27 @@ GPIO_Status GPIO_Init(GPIO_TypeDef *port, uint8_t pin, uint8_t mode,
 }
 
 GPIO_Status GPIO_Write(GPIO_TypeDef *port, uint8_t pin, GPIO_Level level) {
-  if (pin >= 16U)
+  if (pin >= 16U) {
     return GPIO_ERROR_INVALID_PIN;
+  }
 
-  if (level == GPIO_HIGH)
+  if (level == GPIO_HIGH) {
     port->ODR |= (1UL << pin);
-  else
+  } else {
     port->ODR &= ~(1UL << pin);
+  }
 
   return GPIO_OK;
+}
+
+GPIO_Level GPIO_Read(GPIO_TypeDef *port, uint8_t pin) {
+  if (pin >= 16U) {
+    return GPIO_LOW;
+  }
+
+  if (port->IDR & (1UL << pin)) {
+    return GPIO_HIGH;
+  }
+
+  return GPIO_LOW;
 }

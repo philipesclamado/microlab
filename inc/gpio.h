@@ -60,4 +60,6 @@ GPIO_Status GPIO_Init(GPIO_TypeDef *port, uint8_t pin, uint8_t mode,
 
 GPIO_Status GPIO_Write(GPIO_TypeDef *port, uint8_t pin, GPIO_Level level);
 
+GPIO_Level GPIO_Read(GPIO_TypeDef *port, uint8_t pin);
+
 #endif
